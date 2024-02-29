@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册页面</title>
+    <link href="{{ url_for('static', filename='register.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <div class="header">Register</div>
+            <div class="form-wrapper">
+                <form  id="registerForm">
+                <input type="text" name="username" placeholder="Username" class="input-item">
+                <input type="password" name="password" placeholder="Password" class="input-item" autocomplete="off">
+                <input type="password" name="confirm" placeholder="确认密码" class="input-item" autocomplete="off">
+            
+            <button type="submit" class="btn">Register</button>
+        </form>
+            </div>
+            <div class="msg">
+                Already have an account?
+                <a href="login">Login</a>
+            </div>
+        </div>
+    </div>
+
+   
+     <!-- 引入 register.js 文件 -->
+     <script src="{{ url_for('static', filename='register.js') }}"></script>
+</body>
+</html>
