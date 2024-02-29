@@ -9,6 +9,7 @@ registerForm.addEventListener('submit', async (event) => {
     try {
         const response = await fetch('/api/adduser', {
             method: 'POST',
+            credentials: 'include' ,
             headers: {
                 'Content-Type': 'application/json'
             },

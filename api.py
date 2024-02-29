@@ -33,7 +33,9 @@ def api_login():
 
         if is_valid_user:
             # 登录成功后存储session信息
-            session['is_login'] = True
+            #session['is_login'] = True
+            session.permanent = True  # 将会话设置为持久性会话
+
             session['name'] = username
             return jsonify({'code': '200', 'msg': '登录成功！', 'newUser': username})
         else:
