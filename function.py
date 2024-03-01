@@ -1,11 +1,8 @@
 import hashlib
 from random import randrange
-
-from flask import Flask, render_template
-
 from pyecharts import options as opts
-from pyecharts.charts import Bar
-from pyecharts.charts import Radar
+from pyecharts.charts import Bar,Radar
+
 
 def hash_code(s, salt='nemo'):
     md5 = hashlib.md5()
