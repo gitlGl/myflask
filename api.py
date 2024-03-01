@@ -20,6 +20,8 @@ def api_login():
                 # 登录成功后存储session信息
                 #用户登录相关的session与cookies由flask框架维护
                 session.permanent = True  # 将会话设置为持久性会话
+                
+                #写session触发会话创建，并返回新cookies给客户端
                 session['is_login'] = True
                 session['name'] = username
                 return jsonify({'code': 'ok', 'msg': '登录成功！', 'newUser': username})
