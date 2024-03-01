@@ -53,31 +53,25 @@ def add_user():
         print(username)
         password = request.json.get('password')
         confirm_password = request.json.get('confirm')
-        # 判断所有输入都不为空
-        if username and password and confirm_password:
-            if password != confirm_password:
-                return jsonify({'code': '400', 'msg': '两次密码不匹配！'}), 400
-            
-            
-            # 查询输入的用户名是否已经存在
-            sql_same_user = f'SELECT 1 FROM USER WHERE USERNAME={PH}'
-            database.c.execute(sql_same_user, (username,))
-            same_user = database.c.fetchone()
-            if same_user:
-                return jsonify({'code': '400', 'msg': '用户名已存在'}), 400
-            
-            # 通过检查的数据，插入数据库表中
-            sql_insert_user = f'INSERT INTO USER(USERNAME, PASSWORD) VALUES ({PH},{PH})'
-            database.c.execute(sql_insert_user, (username, hash_code(password)))
-            
-            sql_new_user = f'SELECT id,username FROM USER WHERE USERNAME={PH}'
-            database.c.execute(sql_new_user, (username,))
-            user_id, user = database.c.fetchone()
-            
-            return jsonify({'code': '200', 'msg': '账号生成成功！', 'newUser': {'id': user_id, 'user': user}})
-        else:
-
-            return jsonify({'code': '404', 'msg': '请求参数不全!'})
+       
+        
+        # 查询输入的用户名是否已经存在
+        sql_same_user = f'SELECT 1 FROM USER WHERE USERNAME={PH}'
+        database.c.execute(sql_same_user, (username,))
+        same_user = database.c.fetchone()
+        if same_user:
+            return jsonify({'code': '400', 'msg': '用户名已存在'}), 400
+        
+        # 通过检查的数据，插入数据库表中
+        sql_insert_user = f'INSERT INTO USER(USERNAME, PASSWORD) VALUES ({PH},{PH})'
+        database.c.execute(sql_insert_user, (username, hash_code(password)))
+        
+        sql_new_user = f'SELECT id,username FROM USER WHERE USERNAME={PH}'
+        database.c.execute(sql_new_user, (username,))
+        user_id, user = database.c.fetchone()
+        
+        return jsonify({'code': 'ok', 'msg': '账号生成成功！', 'newUser': {'id': user_id, 'user': user}})
+       
     else:
         abort(400)
         

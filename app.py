@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'nemo'
 app.permanent_session_lifetime = timedelta(seconds=40) # 设置会话过期时间为40s
 
 
-
+@app.route('/')
 @app.route('/index')
 def index():
     if 'is_login' in session and session['is_login']:

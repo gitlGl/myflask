@@ -1,13 +1,24 @@
 const registerForm = document.getElementById('LoginForm');
 
+
 function checkAllFields(formData) {
-    for (let value of formData.values()) {
-        if (!value.trim()) {
-            return false; // 如果有任何一个字段的值为空，则返回 false
+    
+
+    const username = formData.get('username');
+    const password = formData.get('password');
+
+    // 逐个判断字段的值长度和是否只包含键盘字符
+    if (username.trim().length < 3 ||username.trim().length > 20)
+        return "用户名长度为3-16个字符"
+    
+    
+        if(password.trim().length < 3 ||password.trim().length > 20 ||!/^[a-zA-Z0-9!@#$%^&*()_+-=]+$/.test(password)) {
+            return "密码为长度为3-16个数字字母特殊字符"
         }
-    }
-    return true; // 所有字段都有内容，返回 true
+
+    return true
 }
+
 
 
 registerForm.addEventListener('submit', async (event) => {
@@ -16,8 +27,8 @@ registerForm.addEventListener('submit', async (event) => {
 
     allFieldsHaveContent = checkAllFields(formData)
 
-    if (!allFieldsHaveContent) {
-        alert('输入用户名或密码')
+    if (allFieldsHaveContent!=true) {
+        alert(allFieldsHaveContent)
         return false
     }
     
@@ -43,6 +54,7 @@ registerForm.addEventListener('submit', async (event) => {
 
         if (data["code"] == "ok")
             window.location.href = '/index';
+
 
         if (data["code"] == "error")
             alert('用户名或密码错误!')

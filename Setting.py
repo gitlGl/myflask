@@ -1,13 +1,11 @@
 import os,configparser
 
-type_database = 'mysql' #sqlite3 'sqlite3' or 'mysql
+type_database = 'sqlite3' #sqlite3 'sqlite3' or 'mysql
 file_name ="config.ini"
 
 if not  os.path.exists(file_name):
       
     config = configparser.ConfigParser()    #实例化一个对象
-    config["rember_pwd"] = {  'flag':'0','pwd':'' }     # 类似于操作字典的形式
-    config["aotu_login"] = {'flag':'0','login_states':''}
     config['sql'] = {
             'host' : '127.0.0.1',
             'port' : '3306',
